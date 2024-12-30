@@ -16,6 +16,7 @@ temp_dir=$(mktemp -d)
 trap 'rm -rf "${temp_dir}"' EXIT
 
 file_list=(
+    "Dorfromantik.desktop"
     "Balatro.desktop"
     "Command & Conquer Red Alert 2 and Yuris Revenge.desktop"
 )
