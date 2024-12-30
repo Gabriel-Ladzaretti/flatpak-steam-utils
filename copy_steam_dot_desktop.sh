@@ -15,7 +15,14 @@ cp -rn "$STEAM_HICOLOR_DIR"/* "$USER_HICOLOR_DIR"
 temp_dir=$(mktemp -d)
 trap 'rm -rf "${temp_dir}"' EXIT
 
-cp "${STEAM_DOT_DESKTOP_DIR}"/*.desktop "$temp_dir"
+file_list=(
+    "Balatro.desktop"
+    "Command & Conquer Red Alert 2 and Yuris Revenge.desktop"
+)
+
+for file in "${file_list[@]}"; do
+    cp "${STEAM_DOT_DESKTOP_DIR}/$file" "$temp_dir"
+done
 
 # Modify the desktop entries
 for file in "$temp_dir"/*.desktop; do
