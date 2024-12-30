@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-STEAM_DOT_DESKTOP_DIR="${HOME}/.var/app/com.valvesoftware.Steam/.local/share/applications"
+STEAM_DOT_DESKTOP_DIR="${HOME}/.var/app/com.valvesoftware.Steam/Desktop"
 STEAM_HICOLOR_DIR="${HOME}/.var/app/com.valvesoftware.Steam/.local/share/icons"
 
 USER_DESKTOP_DIR="${HOME}/.local/share/applications"
@@ -16,9 +16,12 @@ temp_dir=$(mktemp -d)
 trap 'rm -rf "${temp_dir}"' EXIT
 
 file_list=(
-    "Dorfromantik.desktop"
     "Balatro.desktop"
+    "Black Mesa.desktop"
     "Command & Conquer Red Alert 2 and Yuris Revenge.desktop"
+    "Dorfromantik.desktop"
+    "Half-Life 2.desktop"e
+    "Half-Life.desktop"
 )
 
 for file in "${file_list[@]}"; do

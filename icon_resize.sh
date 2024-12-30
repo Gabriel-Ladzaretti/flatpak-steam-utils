@@ -2,18 +2,18 @@
 
 set -euo pipefail
 
-icon_src=${1:?"Error: Argument <icon_source> is required. Usage: $0 <icon_source> <icon_dest>"}
-icon_dest=${2:?"Error: Argument <icon_dest> is required. Usage: $0 <icon_source> <icon_dest>"}
+source_icon=${1:?"Error: Argument <icon_source> is required. Usage: $0 <icon_source> <output_icon_name>"}
+output_icon_name=${2:?"Error: Argument <output_icon_name> is required. Usage: $0 <icon_source> <output_icon_name>"}
 
-USER_HICOLOR_DIR="${HOME}/.local/share/icons"
+USER_HICOLOR_DIR="${HOME}/.local/share/icons/hicolor"
 
-if ! command -v convert &>/dev/null; then
-    echo "Error: 'convert' command not found. Please install ImageMagick." >&2
+if ! command -v magick &>/dev/null; then
+    echo "Error: 'magick' command not found. Please install ImageMagick." >&2
     exit 1
 fi
 
-if [ ! -f "$icon_src" ]; then
-    echo "Error: Source file '$icon_src' does not exist or is not a regular file." >&2
+if [ ! -f "$source_icon" ]; then
+    echo "Error: Source file '$source_icon' does not exist or is not a regular file." >&2
     exit 1
 fi
 
@@ -29,5 +29,8 @@ sizes=(
 )
 
 for size in "${sizes[@]}"; do
-    convert -resize "$size" "$icon_src" "${USER_HICOLOR_DIR}/${size}/apps/${icon_dest}"
+    echo magick "$source_icon" -resize "$size" "${USER_HICOLOR_DIR}/${size}/apps/${output_icon_name}" &&
+        magick "$source_icon" -resize "$size" "${USER_HICOLOR_DIR}/${size}/apps/${output_icon_name}"
 done
+
+sudo gtk-update-icon-cache -f /usr/share/icons/hicolor/
