@@ -18,10 +18,13 @@ trap 'rm -rf "${temp_dir}"' EXIT
 file_list=(
     "Balatro.desktop"
     "Black Mesa.desktop"
+    "Brotato.desktop"
     "Command & Conquer Red Alert 2 and Yuris Revenge.desktop"
     "Dorfromantik.desktop"
-    "Half-Life 2.desktop"e
+    "Half-Life 2.desktop"
     "Half-Life.desktop"
+    "Slay the Spire.desktop"
+    "Vampire Survivors.desktop"
 )
 
 for file in "${file_list[@]}"; do
