@@ -6,14 +6,14 @@ This repository contains utility scripts for managing Flatpak Steam `.desktop` e
 
 ### Desktop Entry Copier
 
-This script copies Steam desktop entries from the Flatpak installation to the user’s local desktop application directory and updates the `Exec` field to use the Flatpak Steam version.
+This script copies Steam desktop entries from the Flatpak sandboxed Steam installation to the user's desktop shortcuts directory.
 
 #### Usage:
 ```bash
 ./copy-desktop-entries.sh <list_file>
 ```
 
-Where the list_file contains entries to copy. For example:
+Where the `list_file` contains entries to copy. For example:
 
 ```
 game1.desktop
@@ -22,11 +22,11 @@ game2.desktop
 ```
 
 ### Icon Resizer
-This script resizes a given icon into multiple sizes and saves it to the user's hicolor icons directory with the specified name.
+This script resizes a given icon into multiple sizes and saves it to the user's `hicolor` icons directory with the specified name.
 
 Usage:
 ```bash
-./resize-icon.sh <icon_source> <output_icon_name> 
+./resize-icon.sh <source_icon> <output_icon_name> 
 ```
 
 For example:
