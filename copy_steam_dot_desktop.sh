@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+FILE_LIST=${1:?"Usage: $? <file_list>"}
+
 STEAM_DOT_DESKTOP_DIR="${HOME}/.var/app/com.valvesoftware.Steam/Desktop"
 STEAM_HICOLOR_DIR="${HOME}/.var/app/com.valvesoftware.Steam/.local/share/icons"
 
@@ -15,25 +17,17 @@ cp -rn "$STEAM_HICOLOR_DIR"/* "$USER_HICOLOR_DIR"
 temp_dir=$(mktemp -d)
 trap 'rm -rf "${temp_dir}"' EXIT
 
-file_list=(
-    "Balatro.desktop"
-    "Black Mesa.desktop"
-    "Brotato.desktop"
-    "Command & Conquer Red Alert 2 and Yuris Revenge.desktop"
-    "Dorfromantik.desktop"
-    "Half-Life 2.desktop"
-    "Half-Life.desktop"
-    "Slay the Spire.desktop"
-    "Vampire Survivors.desktop"
-)
-
-for file in "${file_list[@]}"; do
+while IFS= read -r file; do
+    echo cp "${STEAM_DOT_DESKTOP_DIR}/$file" "$temp_dir"
     cp "${STEAM_DOT_DESKTOP_DIR}/$file" "$temp_dir"
-done
+done <"$FILE_LIST"
 
-# Modify the desktop entries
+# Modify the desktop entries so that the Exec entrypoint uses the Flatpak Steam
 for file in "$temp_dir"/*.desktop; do
     sed -i 's|^Exec=steam|Exec=flatpak run com.valvesoftware.Steam|' "$file"
 done
 
 cp -n "$temp_dir"/*.desktop "$USER_DESKTOP_DIR"
+
+echo "Desktop entries successfully copied from '${STEAM_DOT_DESKTOP_DIR}' to '${USER_DESKTOP_DIR}'."
+echo "Icon files successfully copied from '${STEAM_HICOLOR_DIR}' to '${USER_HICOLOR_DIR}'."

@@ -28,8 +28,11 @@ sizes=(
 )
 
 for size in "${sizes[@]}"; do
-    echo magick "$source_icon" -resize "$size" "${dest_hicolor_dir}/${size}/apps/${output_icon_name}" &&
-        magick "$source_icon" -resize "$size" "${dest_hicolor_dir}/${size}/apps/${output_icon_name}"
+    echo "Resizing '$source_icon' to $size and saving as '${dest_hicolor_dir}/${size}/apps/${output_icon_name}'..."
+    magick "$source_icon" -resize "$size" "${dest_hicolor_dir}/${size}/apps/${output_icon_name}"
+    echo "OK"
 done
 
+echo "Updating GTK icon cache..."
 sudo gtk-update-icon-cache -f /usr/share/icons/hicolor/
+echo "Icon cache updated successfully."
