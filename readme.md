@@ -10,16 +10,18 @@ This script copies Steam desktop entries from the Flatpak sandboxed Steam instal
 
 #### Usage:
 ```bash
-./copy-desktop-entries.sh <list_file>
+./copy-desktop-entries.sh <list_file> [scale_factor]
 ```
 
-Where the `list_file` contains entries to copy. For example:
-
+<list_file>: A file containing the list of desktop entries to copy. For example:
 ```
 game1.desktop
 game2.desktop
 ...
 ```
+
+[scale_factor]: An optional scaling factor to apply to the Steam client. This is useful if the Steam client is not yet open.
+
 
 ### Icon Resizer
 This script resizes a given icon into multiple sizes and saves it to the user's `hicolor` icons directory with the specified name.
